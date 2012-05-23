@@ -1,0 +1,12 @@
+SGParametricosBundle:
+    resource: "@SGParametricosBundle/Resources/config/routing.yml"
+    prefix:   /
+
+SGUsuariosBundle:
+    resource: "@SGUsuariosBundle/Resources/config/routing.yml"
+    prefix:   /
+
+# Internal routing configuration to handle ESI
+#_internal:
+#   resource: "@FrameworkBundle/Resources/config/routing/internal.xml"
+#   prefix:   /_internal

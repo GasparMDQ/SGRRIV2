@@ -1,0 +1,7 @@
+parameters:
+#    sg_usuarios.example.class: SG\UsuariosBundle\Example
+
+services:
+#    sg_usuarios.example:
+#        class: %sg_usuarios.example.class%
+#        arguments: [@service_id, "plain_value", %parameter%]

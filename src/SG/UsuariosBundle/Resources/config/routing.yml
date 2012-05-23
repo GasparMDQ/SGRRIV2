@@ -1,0 +1,3 @@
+SGUsuariosBundle_homepage:
+    pattern:  /hello/{name}
+    defaults: { _controller: SGUsuariosBundle:Default:index }

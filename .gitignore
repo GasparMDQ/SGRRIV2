@@ -10,3 +10,10 @@ web/bundles/*
 
 # Configuration files
 app/config/parameters.ini
+/nbproject/private/
+/deps
+/deps.lock
+/LICENSE
+/README.md
+/Modelo.mwb
+/Modelo.mwb.bak
