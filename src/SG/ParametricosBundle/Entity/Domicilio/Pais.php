@@ -28,6 +28,11 @@ class Pais
      */
     private $nombre;
 
+    /**
+     * @ORM\OneToMany(targetEntity="Provincia", mappedBy="pais")
+     */
+    protected $provincias;
+
 
     /**
      * Get id
@@ -57,5 +62,29 @@ class Pais
     public function getNombre()
     {
         return $this->nombre;
+    }
+    public function __construct()
+    {
+        $this->provincias = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+    
+    /**
+     * Add provincias
+     *
+     * @param SG\ParametricosBundle\Entity\Domicilio\Provincia $provincias
+     */
+    public function addProvincia(\SG\ParametricosBundle\Entity\Domicilio\Provincia $provincias)
+    {
+        $this->provincias[] = $provincias;
+    }
+
+    /**
+     * Get provincias
+     *
+     * @return Doctrine\Common\Collections\Collection 
+     */
+    public function getProvincias()
+    {
+        return $this->provincias;
     }
 }

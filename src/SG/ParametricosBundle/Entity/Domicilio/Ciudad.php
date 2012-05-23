@@ -28,7 +28,12 @@ class Ciudad
      */
     private $nombre;
 
-
+    /**
+     * @ORM\ManyToOne(targetEntity="Provincia", inversedBy="ciudades")
+     * @ORM\JoinColumn(name="provincia_id", referencedColumnName="id")
+     */
+    protected $provincia;
+    
     /**
      * Get id
      *
@@ -57,5 +62,25 @@ class Ciudad
     public function getNombre()
     {
         return $this->nombre;
+    }
+
+    /**
+     * Set provincia
+     *
+     * @param SG\ParametricosBundle\Entity\Domicilio\Provincia $provincia
+     */
+    public function setProvincia(\SG\ParametricosBundle\Entity\Domicilio\Provincia $provincia)
+    {
+        $this->provincia = $provincia;
+    }
+
+    /**
+     * Get provincia
+     *
+     * @return SG\ParametricosBundle\Entity\Domicilio\Provincia 
+     */
+    public function getProvincia()
+    {
+        return $this->provincia;
     }
 }

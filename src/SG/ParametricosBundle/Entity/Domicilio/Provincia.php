@@ -28,7 +28,17 @@ class Provincia
      */
     private $nombre;
 
+    /**
+     * @ORM\OneToMany(targetEntity="Ciudad", mappedBy="provincia")
+     */
+    protected $ciudades;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="Pais", inversedBy="provincias")
+     * @ORM\JoinColumn(name="pais_id", referencedColumnName="id")
+     */
+    protected $pais;
+    
     /**
      * Get id
      *
@@ -57,5 +67,49 @@ class Provincia
     public function getNombre()
     {
         return $this->nombre;
+    }
+    public function __construct()
+    {
+        $this->ciudades = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+    
+    /**
+     * Add ciudades
+     *
+     * @param SG\ParametricosBundle\Entity\Domicilio\Ciudad $ciudades
+     */
+    public function addCiudad(\SG\ParametricosBundle\Entity\Domicilio\Ciudad $ciudades)
+    {
+        $this->ciudades[] = $ciudades;
+    }
+
+    /**
+     * Get ciudades
+     *
+     * @return Doctrine\Common\Collections\Collection 
+     */
+    public function getCiudades()
+    {
+        return $this->ciudades;
+    }
+
+    /**
+     * Set pais
+     *
+     * @param SG\ParametricosBundle\Entity\Domicilio\Pais $pais
+     */
+    public function setPais(\SG\ParametricosBundle\Entity\Domicilio\Pais $pais)
+    {
+        $this->pais = $pais;
+    }
+
+    /**
+     * Get pais
+     *
+     * @return SG\ParametricosBundle\Entity\Domicilio\Pais 
+     */
+    public function getPais()
+    {
+        return $this->pais;
     }
 }

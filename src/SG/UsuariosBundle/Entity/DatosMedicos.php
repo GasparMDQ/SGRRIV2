@@ -22,7 +22,7 @@ class DatosMedicos
     private $id;
 
     /** 
-     * @OneToOne(targetEntity="Usuario", inversedBy="datosMedicos")
+     * @ORM\OneToOne(targetEntity="Usuario", mappedBy="datosMedicos")
      */
     private $usuario;
 
@@ -131,7 +131,28 @@ class DatosMedicos
      */
     private $limitacionFisica;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="\SG\ParametricosBundle\Entity\TipoFactor")
+     */
+    protected $tipoFactor;
+    
+    /**
+     * @ORM\ManyToOne(targetEntity="\SG\ParametricosBundle\Entity\TipoGrupo")
+     */
+    protected $tipoGrupo;
+    
+    /**
+     * @ORM\ManyToMany(targetEntity="\SG\UsuariosBundle\Entity\DatosMedicos\Medicamentos")
+     * @ORM\JoinTable(name="datoMedico_medicamento",
+     *      joinColumns={@ORM\JoinColumn(name="datoMedico_id", referencedColumnName="id")},
+     *      inverseJoinColumns={@ORM\JoinColumn(name="medicamento_id", referencedColumnName="id")}
+     *      )
+     */
+    private $medicamentos;
 
+    public function __construct() {
+    }
+    
     /**
      * Get id
      *
@@ -440,5 +461,85 @@ class DatosMedicos
     public function getLimitacionFisica()
     {
         return $this->limitacionFisica;
+    }
+
+    /**
+     * Set usuario
+     *
+     * @param SG\UsuariosBundle\Entity\Usuario $usuario
+     */
+    public function setUsuario(\SG\UsuariosBundle\Entity\Usuario $usuario)
+    {
+        $this->usuario = $usuario;
+    }
+
+    /**
+     * Get usuario
+     *
+     * @return SG\UsuariosBundle\Entity\Usuario 
+     */
+    public function getUsuario()
+    {
+        return $this->usuario;
+    }
+
+    /**
+     * Set tipoFactor
+     *
+     * @param SG\ParametricosBundle\Entity\TipoFactor $tipoFactor
+     */
+    public function setTipoFactor(\SG\ParametricosBundle\Entity\TipoFactor $tipoFactor)
+    {
+        $this->tipoFactor = $tipoFactor;
+    }
+
+    /**
+     * Get tipoFactor
+     *
+     * @return SG\ParametricosBundle\Entity\TipoFactor 
+     */
+    public function getTipoFactor()
+    {
+        return $this->tipoFactor;
+    }
+
+    /**
+     * Set tipoGrupo
+     *
+     * @param SG\ParametricosBundle\Entity\TipoGrupo $tipoGrupo
+     */
+    public function setTipoGrupo(\SG\ParametricosBundle\Entity\TipoGrupo $tipoGrupo)
+    {
+        $this->tipoGrupo = $tipoGrupo;
+    }
+
+    /**
+     * Get tipoGrupo
+     *
+     * @return SG\ParametricosBundle\Entity\TipoGrupo 
+     */
+    public function getTipoGrupo()
+    {
+        return $this->tipoGrupo;
+    }
+
+    /**
+     * Add medicamentos
+     *
+     * @param SG\UsuariosBundle\Entity\DatosMedicos\Medicamentos $medicamentos
+     */
+    public function addMedicamentos(\SG\UsuariosBundle\Entity\DatosMedicos\Medicamentos $medicamentos)
+    {
+        $this->medicamentos[] = $medicamentos;
+    }
+
+    /**
+     * Get medicamentos
+     *
+     * @return Doctrine\Common\Collections\Collection 
+     */
+    public function getMedicamentos()
+    {
+        return $this->medicamentos;
     }
 }

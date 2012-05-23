@@ -22,7 +22,7 @@ class DatosPersonales
     private $id;
 
     /** 
-     * @OneToOne(targetEntity="Usuario", mappedBy="datosPersonales")
+     * @ORM\OneToOne(targetEntity="Usuario", mappedBy="datosPersonales")
      */
     private $usuario;
 
@@ -61,6 +61,24 @@ class DatosPersonales
      */
     private $fechaDeNacimiento;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="\SG\ParametricosBundle\Entity\TipoDocumento")
+     */
+    protected $tipoDocumento;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="\SG\ParametricosBundle\Entity\Domicilio")
+     */
+    protected $domicilio;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="\SG\ParametricosBundle\Entity\Telefono")
+     * @ORM\JoinTable(name="datoPersonal_telefono",
+     *      joinColumns={@ORM\JoinColumn(name="datoPersonal_id", referencedColumnName="id")},
+     *      inverseJoinColumns={@ORM\JoinColumn(name="telefono_id", referencedColumnName="id")}
+     *      )
+     */
+    private $telefonos;
 
     /**
      * Get id
@@ -170,5 +188,89 @@ class DatosPersonales
     public function getFechaDeNacimiento()
     {
         return $this->fechaDeNacimiento;
+    }
+    public function __construct()
+    {
+        $this->telefonos = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+    
+    /**
+     * Set usuario
+     *
+     * @param SG\UsuariosBundle\Entity\Usuario $usuario
+     */
+    public function setUsuario(\SG\UsuariosBundle\Entity\Usuario $usuario)
+    {
+        $this->usuario = $usuario;
+    }
+
+    /**
+     * Get usuario
+     *
+     * @return SG\UsuariosBundle\Entity\Usuario 
+     */
+    public function getUsuario()
+    {
+        return $this->usuario;
+    }
+
+    /**
+     * Set tipoDocumento
+     *
+     * @param SG\ParametricosBundle\Entity\TipoDocumento $tipoDocumento
+     */
+    public function setTipoDocumento(\SG\ParametricosBundle\Entity\TipoDocumento $tipoDocumento)
+    {
+        $this->tipoDocumento = $tipoDocumento;
+    }
+
+    /**
+     * Get tipoDocumento
+     *
+     * @return SG\ParametricosBundle\Entity\TipoDocumento 
+     */
+    public function getTipoDocumento()
+    {
+        return $this->tipoDocumento;
+    }
+
+    /**
+     * Add telefonos
+     *
+     * @param SG\ParametricosBundle\Entity\Telefono $telefonos
+     */
+    public function addTelefono(\SG\ParametricosBundle\Entity\Telefono $telefonos)
+    {
+        $this->telefonos[] = $telefonos;
+    }
+
+    /**
+     * Get telefonos
+     *
+     * @return Doctrine\Common\Collections\Collection 
+     */
+    public function getTelefonos()
+    {
+        return $this->telefonos;
+    }
+
+    /**
+     * Set domicilio
+     *
+     * @param SG\ParametricosBundle\Entity\Domicilio $domicilio
+     */
+    public function setDomicilio(\SG\ParametricosBundle\Entity\Domicilio $domicilio)
+    {
+        $this->domicilio = $domicilio;
+    }
+
+    /**
+     * Get domicilio
+     *
+     * @return SG\ParametricosBundle\Entity\Domicilio 
+     */
+    public function getDomicilio()
+    {
+        return $this->domicilio;
     }
 }
