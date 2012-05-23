@@ -2,6 +2,7 @@
 
 namespace SG\UsuariosBundle\Entity;
 
+use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Core\User\AdvancedUserInterface;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -37,12 +38,12 @@ class Usuario implements AdvancedUserInterface
     private $password;
 
     /** 
-     * @OneToOne(targetEntity="DatosPersonales", inversedBy="usuario")
+     * @ORM\OneToOne(targetEntity="DatosPersonales", inversedBy="usuario")
      */
     private $datosPersonales;
 
     /** 
-     * @OneToOne(targetEntity="DatosMedicos", inversedBy="usuario")
+     * @ORM\OneToOne(targetEntity="DatosMedicos", inversedBy="usuario")
      */
     private $datosMedicos;
 
@@ -94,5 +95,79 @@ class Usuario implements AdvancedUserInterface
     public function getPassword()
     {
         return $this->password;
+    }
+
+    function isAccountNonExpired()
+    {
+    }
+
+    function isAccountNonLocked()
+    {
+    }
+    
+    function isCredentialsNonExpired()
+    {
+    }
+    
+    function isEnabled()
+    {
+    }
+
+    function getRoles()
+    {
+    }
+
+    function getSalt()
+    {
+    }
+
+    function eraseCredentials()
+    {
+    }
+
+    function equals(UserInterface $user)
+    {
+    }
+
+    
+
+    /**
+     * Set datosPersonales
+     *
+     * @param SG\UsuariosBundle\Entity\DatosPersonales $datosPersonales
+     */
+    public function setDatosPersonales(\SG\UsuariosBundle\Entity\DatosPersonales $datosPersonales)
+    {
+        $this->datosPersonales = $datosPersonales;
+    }
+
+    /**
+     * Get datosPersonales
+     *
+     * @return SG\UsuariosBundle\Entity\DatosPersonales 
+     */
+    public function getDatosPersonales()
+    {
+        return $this->datosPersonales;
+    }
+
+    /**
+     * Set datosMedicos
+     *
+     * @param SG\UsuariosBundle\Entity\DatosMedicos $datosMedicos
+     */
+    public function setDatosMedicos(\SG\UsuariosBundle\Entity\DatosMedicos $datosMedicos)
+    {
+        $this->datosMedicos = $datosMedicos;
+    }
+
+    /**
+     * Get datosMedicos
+     *
+     * @return SG\UsuariosBundle\Entity\DatosMedicos 
+     */
+    public function getDatosMedicos()
+    {
+        return $this->datosMedicos;
     }
 }

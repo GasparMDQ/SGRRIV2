@@ -56,7 +56,21 @@ class Domicilio
      */
     private $codigoPostal;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="SG\ParametricosBundle\Entity\Domicilio\Pais")
+     */
+    protected $pais;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="SG\ParametricosBundle\Entity\Domicilio\Provincia")
+     */
+    protected $provincia;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="SG\ParametricosBundle\Entity\Domicilio\Ciudad")
+     */
+    protected $ciudad;
+    
     /**
      * Get id
      *
@@ -165,5 +179,65 @@ class Domicilio
     public function getCodigoPostal()
     {
         return $this->codigoPostal;
+    }
+
+    /**
+     * Set pais
+     *
+     * @param SG\ParametricosBundle\Entity\Pais $pais
+     */
+    public function setPais(\SG\ParametricosBundle\Entity\Pais $pais)
+    {
+        $this->pais = $pais;
+    }
+
+    /**
+     * Get pais
+     *
+     * @return SG\ParametricosBundle\Entity\Pais 
+     */
+    public function getPais()
+    {
+        return $this->pais;
+    }
+
+    /**
+     * Set provincia
+     *
+     * @param SG\ParametricosBundle\Entity\Provincia $provincia
+     */
+    public function setProvincia(\SG\ParametricosBundle\Entity\Provincia $provincia)
+    {
+        $this->provincia = $provincia;
+    }
+
+    /**
+     * Get provincia
+     *
+     * @return SG\ParametricosBundle\Entity\Provincia 
+     */
+    public function getProvincia()
+    {
+        return $this->provincia;
+    }
+
+    /**
+     * Set ciudad
+     *
+     * @param SG\ParametricosBundle\Entity\Ciudad $ciudad
+     */
+    public function setCiudad(\SG\ParametricosBundle\Entity\Ciudad $ciudad)
+    {
+        $this->ciudad = $ciudad;
+    }
+
+    /**
+     * Get ciudad
+     *
+     * @return SG\ParametricosBundle\Entity\Ciudad 
+     */
+    public function getCiudad()
+    {
+        return $this->ciudad;
     }
 }
